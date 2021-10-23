@@ -41,6 +41,7 @@ class UserController extends Controller
             'sex' => $request->sex,
             'student_no' => $request->student_no,
             'user_agent' => $request->userAgent(),
+            'ip' => $request->ip(),
         ];
         Redis::srem($key, json_encode([
             'school' => $request->school,
