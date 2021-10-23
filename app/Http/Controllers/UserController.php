@@ -52,7 +52,10 @@ class UserController extends Controller
         ]));
         Redis::sadd($key, json_encode($data));
         session($data);
-        DB::table('login_log')->insert($data);
+        DB::table('login_log')->insert(array_merge($data, [
+            'created_at' => time(),
+            'updated_at' => time(),
+        ]));
     }
 
     public function quit(Request $request)
