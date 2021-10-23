@@ -262,7 +262,8 @@ class IndexController extends Controller
         $stat = Data::where('id', session('last_id'))->value('stat');
         $score = 0;
         if ($stat) {
-            $score = (int)$stat['right'] * 100 / ($stat['right'] + $stat['wrong']);
+            $statTotal = $stat['right'] + $stat['wrong'];
+            $score = (int)$statTotal ? ($stat['right'] * 100 / $statTotal) : 0;
         } else {
             Log::info('找不到play stat', session()->all());
         }
