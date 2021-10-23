@@ -23,6 +23,7 @@ class CreateLoginLogTable extends Migration
             $table->string('sex')->default('');
             $table->string('student_no')->default('');
             $table->string('user_agent')->default('');
+            $table->string('ip')->default('');
             $table->timestamps();
         });
     }
