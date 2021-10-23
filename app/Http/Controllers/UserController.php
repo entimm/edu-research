@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
 
 class UserController extends Controller
@@ -39,6 +40,7 @@ class UserController extends Controller
             'age' => $request->age,
             'sex' => $request->sex,
             'student_no' => $request->student_no,
+            'user_agent' => $request->userAgent(),
         ];
         Redis::srem($key, json_encode([
             'school' => $request->school,
@@ -50,6 +52,7 @@ class UserController extends Controller
         ]));
         Redis::sadd($key, json_encode($data));
         session($data);
+        DB::table('login_log')->insert($data);
     }
 
     public function quit(Request $request)
